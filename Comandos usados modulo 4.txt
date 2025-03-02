@@ -1,0 +1,155 @@
+Comandos usados practica 1
+
+============================================
+2. Crear un sitio web estático con "Hola Mundo"
+Crea el directorio del sitio:
+
+sudo mkdir -p /var/www/html/hola_mundo
+echo '<!DOCTYPE html>
+<html>
+<head><title>Hola Mundo</title></head>
+<body><h1>Hola Mundo</h1></body>
+</html>' | sudo tee /var/www/html/hola_mundo/index.html
+
+
+3. Configurar el host virtual en el puerto 80
+Crea un archivo de configuración:
+
+sudo nano /etc/apache2/sites-available/hola_mundo.conf
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/hola_mundo
+    ServerName hola_mundo.local
+
+    <Directory /var/www/html/hola_mundo>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+Habilita el sitio y reinicia Apache:
+
+sudo a2ensite hola_mundo.conf
+sudo systemctl restart apache2
+
+Para acceder al sitio, agrega la siguiente línea al archivo hosts:
+
+sudo nano /etc/hosts
+
+127.0.0.1 hola_mundo.local
+
+4. Crear otro sitio con tu nombre, matrícula y materia
+Crea el directorio del sitio:
+
+sudo mkdir -p /var/www/html/datos_personales
+
+echo '<!DOCTYPE html>
+<html>
+<head><title>Datos Personales</title></head>
+<body>
+    <h1>Maxwell Abreu</h1>
+    <h2>Matricula: 2024-1209</h2>
+    <h3>Materia: Sistemas Operativos 3</h3>
+</body>
+</html>' | sudo tee /var/www/html/datos_personales/index.html
+
+5. Configurar el host virtual en el puerto 8080
+Crea un nuevo archivo de configuración:
+
+sudo nano /etc/apache2/sites-available/datos_personales.conf
+
+<VirtualHost *:8080>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/datos_personales
+    ServerName datos_personales.local
+
+    <Directory /var/www/html/datos_personales>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+sudo a2ensite datos_personales.conf
+sudo systemctl restart apache2
+
+Habilita el puerto 8080 en Apache:
+
+sudo nano /etc/apache2/ports.conf
+
+Listen 8080
+
+sudo systemctl restart apache2
+
+sudo nano /etc/hosts
+
+Y añade:
+
+127.0.0.1 datos_personales.local
+
+6. Verifica que todo funcione
+Ejecuta:
+
+sudo apachectl configtest
+
+sudo a2dissite 000-default.conf
+
+sudo systemctl restart apache2
+
+Comandos usados practica 2
+
+============================================
+
+sudo dpkg-reconfigure postfix
+
+sudo apt install mailutils -y
+
+$myhostname, localhost.$mydomain, localhost
+
+
+sudo nano /etc/postfix/sasl/sasl_passwd
+
+sudo postmap /etc/postfix/sasl/sasl_passwd
+
+sudo chmod 600 /etc/postfix/sasl/sasl_passwd
+sudo chmod 600 /etc/postfix/sasl/sasl_passwd.db
+
+
+relayhost = [smtp.gmail.com]:587
+smtp_use_tls = yes
+smtp_tls_note_starttls_offer = yes
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl/sasl_passwd
+smtp_sasl_security_options = noanonymous
+smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt 
+
+
+[smtp.gmail.com]:587 correo_principal@gmail.com:bgzx upzf oked arzm
+
+echo "Maxwell Abreu\nMatrícula: XXXXXXX" | mail -s "MambruSeFueALaGuerra" correo_destino@gmail.com 
+
+Comandos usados practica 3
+
+==========================================
+
+sudo apt install cups 
+
+systemctl status cups
+
+sudo apt install cups-pdf 
+
+lo siguiente seria entrar al navegador y colocar 10.0.0.12:631
+
+y agregar la impresora virtual con la opcion de share printers connected, allow priting from the internet y allow remote administration 
+
+despues entrar a la impresora y copiar la url que esta en el navegador ejemplo: 10.0.0.12:631/printers/
+
+y agregarla de forma manual en nuestra maquina host
+
+luego realizar pruebas 
