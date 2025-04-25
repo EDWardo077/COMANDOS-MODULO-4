@@ -1,4 +1,4 @@
-Comandos usados practica 1
+Comandos usados practica 1 - Instalar un servidor HTTP apache2/nginx
 
 ============================================
 2. Crear un sitio web estático con "Hola Mundo"
@@ -102,7 +102,9 @@ sudo a2dissite 000-default.conf
 
 sudo systemctl restart apache2
 
-Comandos usados practica 2
+=============================================
+
+Comandos usados practica 2 - Instalar un servidor de correos
 
 ============================================
 
@@ -134,7 +136,9 @@ smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
 
 echo "Maxwell Abreu\nMatrícula: XXXXXXX" | mail -s "MambruSeFueALaGuerra" correo_destino@gmail.com 
 
-Comandos usados practica 3
+========================================
+
+Comandos usados practica 3 - Instalar un servidor de Impresion
 
 ==========================================
 
@@ -144,11 +148,11 @@ systemctl status cups
 
 sudo apt install cups-pdf 
 
-lo siguiente seria entrar al navegador y colocar 10.0.0.12:631
+lo siguiente seria entrar al navegador y colocar 10.0.0.12:631 o loaclhost:631 (en el navegador de la maquina virtual)
 
 y agregar la impresora virtual con la opcion de share printers connected, allow priting from the internet y allow remote administration 
 
-despues entrar a la impresora y copiar la url que esta en el navegador ejemplo: 10.0.0.12:631/printers/
+despues entrar a la impresora y copiar la url que esta en el navegador ejemplo: 10.0.0.12:631/printers/nombre_de_la_impresora
 
 y agregarla de forma manual en nuestra maquina host
 
